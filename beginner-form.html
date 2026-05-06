@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration Form</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333333;
+      margin-bottom: 5px;
+      font-size: 24px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #888888;
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    /* Each field wrapper */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #444444;
+      margin-bottom: 5px;
+    }
+
+    /* All text inputs, select, textarea */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      color: #333333;
+      background-color: #fafafa;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #4a90e2;
+      background-color: #ffffff;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* Two fields side by side */
+    .row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .row .form-group {
+      flex: 1;
+    }
+
+    /* Radio buttons */
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      margin-top: 5px;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 400;
+      color: #555555;
+      cursor: pointer;
+    }
+
+    /* Range slider */
+    input[type="range"] {
+      width: 100%;
+      accent-color: #4a90e2;
+      cursor: pointer;
+    }
+
+    .range-label {
+      font-size: 13px;
+      color: #4a90e2;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* Checkbox row */
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: #4a90e2;
+      cursor: pointer;
+    }
+
+    .checkbox-row span {
+      font-size: 13px;
+      color: #666666;
+      line-height: 1.5;
+    }
+
+    .checkbox-row a {
+      color: #4a90e2;
+      text-decoration: none;
+    }
+
+    /* Error message */
+    .error {
+      color: #e74c3c;
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+
+    /* Submit button */
+    button[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #4a90e2;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background-color 0.2s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #357abd;
+    }
+
+    /* Success message */
+    #successMsg {
+      display: none;
+      background-color: #eafaf1;
+      border: 1px solid #2ecc71;
+      color: #27ae60;
+      padding: 12px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+
+    /* Divider line */
+    .divider {
+      border: none;
+      border-top: 1px solid #eeeeee;
+      margin: 20px 0;
+    }
+
+    /* Responsive: stack the row on small screens */
+    @media (max-width: 480px) {
+      .row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+
+  <h2>Create Account</h2>
+  <p class="subtitle">Fill in the form below to register</p>
+
+  <form id="regForm">
+
+    <!-- 1 & 2: First Name + Last Name -->
+    <div class="row">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" placeholder="John" />
+        <p class="error" id="firstNameError">First name is required.</p>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" placeholder="Doe" />
+        <p class="error" id="lastNameError">Last name is required.</p>
+      </div>
+    </div>
+
+    <!-- 3: Email -->
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="john@example.com" />
+      <p class="error" id="emailError">Please enter a valid email.</p>
+    </div>
+
+    <!-- 4: Phone -->
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="+92 300 0000000" />
+      <p class="error" id="phoneError">Phone number is required.</p>
+    </div>
+
+    <!-- 5: Date of Birth -->
+    <div class="form-group">
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" />
+      <p class="error" id="dobError">Date of birth is required.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 6: Gender (radio) -->
+    <div class="form-group">
+      <label>Gender</label>
+      <div class="radio-group">
+        <label><input type="radio" name="gender" value="male" /> Male</label>
+        <label><input type="radio" name="gender" value="female" /> Female</label>
+        <label><input type="radio" name="gender" value="other" /> Other</label>
+      </div>
+      <p class="error" id="genderError">Please select your gender.</p>
+    </div>
+
+    <!-- 7: Country (select) -->
+    <div class="form-group">
+      <label for="country">Country</label>
+      <select id="country">
+        <option value="">-- Select Country --</option>
+        <option>Pakistan</option>
+        <option>United States</option>
+        <option>United Kingdom</option>
+        <option>India</option>
+        <option>Canada</option>
+        <option>Australia</option>
+        <option>Other</option>
+      </select>
+      <p class="error" id="countryError">Please select a country.</p>
+    </div>
+
+    <!-- 8: Experience (range) -->
+    <div class="form-group">
+      <label for="experience">Years of Experience</label>
+      <input type="range" id="experience" min="0" max="20" value="2" />
+      <p class="range-label" id="expText">2 years</p>
+    </div>
+
+    <!-- 9: Password -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Min. 8 characters" />
+      <p class="error" id="passwordError">Password must be at least 8 characters.</p>
+    </div>
+
+    <!-- 10: Bio (textarea) -->
+    <div class="form-group">
+      <label for="bio">Short Bio</label>
+      <textarea id="bio" placeholder="Tell us about yourself..."></textarea>
+      <p class="error" id="bioError">Bio cannot exceed 200 characters.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 11: Terms checkbox -->
+    <div class="form-group">
+      <div class="checkbox-row">
+        <input type="checkbox" id="terms" />
+        <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</span>
+      </div>
+      <p class="error" id="termsError">You must accept the terms.</p>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit">Register Now</button>
+
+    <!-- Success message -->
+    <div id="successMsg">
+      ✅ Registration successful! Welcome aboard.
+    </div>
+
+  </form>
+</div>
+
+
+<script>
+
+  // ── Range slider: update text when moved ──
+  var rangeInput = document.getElementById("experience");
+  var rangeText  = document.getElementById("expText");
+
+  rangeInput.addEventListener("input", function() {
+    var val = rangeInput.value;
+    if (val == 1) {
+      rangeText.textContent = "1 year";
+    } else if (val == 20) {
+      rangeText.textContent = "20+ years";
+    } else {
+      rangeText.textContent = val + " years";
+    }
+  });
+
+
+  // ── Show error helper ──
+  function showError(errorId) {
+    document.getElementById(errorId).style.display = "block";
+  }
+
+  // ── Hide error helper ──
+  function hideError(errorId) {
+    document.getElementById(errorId).style.display = "none";
+  }
+
+
+  // ── Form submit ──
+  document.getElementById("regForm").addEventListener("submit", function(e) {
+    e.preventDefault();   // stop page reload
+
+    var isValid = true;   // we assume everything is fine, then check
+
+    // --- Check First Name ---
+    var firstName = document.getElementById("firstName").value.trim();
+    if (firstName == "") {
+      showError("firstNameError");
+      isValid = false;
+    } else {
+      hideError("firstNameError");
+    }
+
+    // --- Check Last Name ---
+    var lastName = document.getElementById("lastName").value.trim();
+    if (lastName == "") {
+      showError("lastNameError");
+      isValid = false;
+    } else {
+      hideError("lastNameError");
+    }
+
+    // --- Check Email ---
+    var email = document.getElementById("email").value.trim();
+    var emailOk = email.includes("@") && email.includes(".");
+    if (email == "" || emailOk == false) {
+      showError("emailError");
+      isValid = false;
+    } else {
+      hideError("emailError");
+    }
+
+    // --- Check Phone ---
+    var phone = document.getElementById("phone").value.trim();
+    if (phone == "") {
+      showError("phoneError");
+      isValid = false;
+    } else {
+      hideError("phoneError");
+    }
+
+    // --- Check Date of Birth ---
+    var dob = document.getElementById("dob").value;
+    if (dob == "") {
+      showError("dobError");
+      isValid = false;
+    } else {
+      hideError("dobError");
+    }
+
+    // --- Check Gender ---
+    var genderPicked = document.querySelector('input[name="gender"]:checked');
+    if (genderPicked == null) {
+      showError("genderError");
+      isValid = false;
+    } else {
+      hideError("genderError");
+    }
+
+    // --- Check Country ---
+    var country = document.getElementById("country").value;
+    if (country == "") {
+      showError("countryError");
+      isValid = false;
+    } else {
+      hideError("countryError");
+    }
+
+    // --- Check Password ---
+    var password = document.getElementById("password").value;
+    if (password.length < 8) {
+      showError("passwordError");
+      isValid = false;
+    } else {
+      hideError("passwordError");
+    }
+
+    // --- Check Bio length ---
+    var bio = document.getElementById("bio").value;
+    if (bio.length > 200) {
+      showError("bioError");
+      isValid = false;
+    } else {
+      hideError("bioError");
+    }
+
+    // --- Check Terms checkbox ---
+    var terms = document.getElementById("terms").checked;
+    if (terms == false) {
+      showError("termsError");
+      isValid = false;
+    } else {
+      hideError("termsError");
+    }
+
+
+    // --- If everything is OK ---
+    if (isValid == true) {
+      document.getElementById("successMsg").style.display = "block";
+      document.getElementById("regForm").reset();
+      rangeText.textContent = "2 years";
+    }
+
+  });
+
+</script>
+</body>
+</html>
